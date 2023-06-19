@@ -1,5 +1,7 @@
 # 🏢 BangBangBwa ( 어디서든 실시간으로 집 매물을 볼 수 있는 부동산 라이브 커머스)
 
+
+![메인](./assets/main.gif)
 ## 🏚방방봐 소개 🏚
 중개사가 등록한 매물을 토대로 방송을 등록하면 호스트와 시청자로 구분하여 실시간으로 집 매물을 확인할 수 있는 서비스
 
@@ -10,7 +12,9 @@
 ## ✨방방봐의 모토
 `빠르게 집을 구하기위해 어디서든 실시간으로 집을 확인하고 집보러 가는 시간을 절약하자!`
 
-## 🕑프로젝트 기간 - 2023.01.03 ~ 2023.02.17
+
+## 🕑프로젝트 기간
+2023.01.03 ~ 2023.02.17
 
 
 ## ✨ 주요 기능
@@ -21,46 +25,71 @@
     - 일반 사용자가 중개사 등록 승인이 되면 매물 등록 및 방송 등록 가능
     - 진행중인 방송이나 방송 예정인 매물 방송 카테고리 보여줌
 
-### 🖥️ 개발 환경
 
----
+### 🖥️ 사용 기술
 
+**Backend - Spring**
 
-🖱**Backend**
+- JAVA → v8
+- JDK → v1.8
+- mysql → v8.0.21
+- spring boot → v3.0.1
 
-<img src="https://img.shields.io/badge/Spring Boot-green?style=flat&logo=Spring Boot&logoColor=white"/>
-<img src="https://img.shields.io/badge/Hibernate-black?style=flat&logo=Hibernate&logoColor=white"/>
-<img src="https://img.shields.io/badge/Spring Security-green?style=flat&logo=Spring Security&logoColor=white"/>
-<img src="https://img.shields.io/badge/WebRTC-black?style=flat&logo=WebRTC&logoColor=white"/>
-<img src="https://img.shields.io/badge/MySQL-blue?style=flat&logo=MySQL&logoColor=white"/>
+**CI/CD**
 
-👀**Frontend**👀
+- AWS EC2
+- Jenkins
+- NGINX
+- SSL
 
-<img src="https://img.shields.io/badge/React-blue?style=flat&logo=React&logoColor=white"/>
-<img src="https://img.shields.io/badge/Redux-purple?style=flat&logo=Redux&logoColor=white"/>
-<img src="https://img.shields.io/badge/JavaScript-yellow?style=flat&logo=JavaScript&logoColor=white"/>
-<img src="https://img.shields.io/badge/styled_components-pink?style=flat&logo=styled-components&logoColor=white"/>
+**Frontend**
 
+- Node.js → v16.0.0 (Openvidu 사용으로 인한 version 다운그레이드)
+- react → v18.2.0
+- Openvidu → 2.19.0
+- npm → v7.10.0
+- redux : v4.2.0
+- @reduxjs/toolkit : v1.9.1
+- react-redux : v8.0.5
+- redux-persist : v6.0.0
 
-🛠**Tools**🛠
+## 💪🏻 성장한 점
 
-<img src="https://img.shields.io/badge/IntelliJ IDEA-purple?style=flat&logo=IntelliJ IDEA&logoColor=white"/>
-<img src="https://img.shields.io/badge/Visual Studio Code IDEA-blue?style=flat&logo=Visual Studio Code&logoColor=white"/>
+- 회원 인증, 인가 구현
+    - Spring Security를 사용하여 Jwt를 사용하고 인증, 인가 부분을 제대로 처리할 수 있었습니다.
 
+- ORM 사용
+    - JPA를 사용함으로써 ORM을 학습하고 특징, 장단점 등에 대해 학습하고 이해하는 시간이었습니다.
+      
+- 자동배포
+    - AWS EC2, Docker, Jenkins를 사용해 자동배포를 경험해 볼 수 있는 시간이었습니다.
+    - Nginx, CertBot으로 HTTPS로 배포해보는 경험해 볼 수 있는 시간이었습니다.
 
-<img src="https://img.shields.io/badge/Visual Amazon AWS-yellow?style=flat&logo=Amazon AWS&logoColor=white"/>
-<img src="https://img.shields.io/badge/NGINX-grreen?style=flat&logo=NGINX&logoColor=white"/>
-<img src="https://img.shields.io/badge/Jenkins-orange?style=flat&logo=Jenkins&logoColor=white"/>
-<img src="https://img.shields.io/badge/Docker-blue?style=flat&logo=Docker&logoColor=white"/>
+## 🙏🏻 아쉬운 점(개선하고 싶은 점)
 
+- 기능 구현
+    - 기간, 능력을 고려하지 않고 기술을 선정하여 기획했던 모든 기능들을 구현하지 못한것이 아쉽습니다.
 
-<img src="https://img.shields.io/badge/GitHub-black?style=flat&logo=GitHub&logoColor=white"/>
-<img src="https://img.shields.io/badge/Jira Software-blue?style=flat&logo=Jira Software&logoColor=whie"/>
-<img src="https://img.shields.io/badge/Notion-black?style=flat&logo=Notion&logoColor=white"/>
-<img src="https://img.shields.io/badge/Mattermost-blue?style=flat&logo=Mattermost&logoColor=white"/>
+- N+1 문제 해결
+    - 여러가지 Join이 발생하여 N+1이 발생했으나 정확히 해결하지 못한점이 아쉬웠습니다.(추후 공부후 수정)
 
+## BangBangBwa 서비스 화면
 
+### 🧩 로그인과 회원가입
+![로그인과 회원가입](./assets/signup,signin.gif)
 
+### 🧩 매물등록
+![매물등록](./assets/itemregister.gif)
+
+### 🧩 매물 상세조회
+![매물상세조회](./assets/itemdetail.gif)
+
+### 🧩 방송등록
+![방송등록](./assets/broadCastRegister.gif)
+
+### 🧩 방송시작
+![방송시작](./assets/broadCast.gif)
+=======
 
 ### ✨ EC2 포트 정리
 ---
