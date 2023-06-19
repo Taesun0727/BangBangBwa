@@ -10,7 +10,8 @@
 ## ✨방방봐의 모토
 `빠르게 집을 구하기위해 어디서든 실시간으로 집을 확인하고 집보러 가는 시간을 절약하자!`
 
-## 🕑프로젝트 기간 - 2023.01.03 ~ 2023.02.17
+## 🕑프로젝트 기간
+2023.01.03 ~ 2023.02.17
 
 
 ## ✨ 주요 기능
@@ -21,45 +22,32 @@
     - 일반 사용자가 중개사 등록 승인이 되면 매물 등록 및 방송 등록 가능
     - 진행중인 방송이나 방송 예정인 매물 방송 카테고리 보여줌
 
-### 🖥️ 개발 환경
+### 🖥️ 사용 기술
 
----
+**Backend - Spring**
 
+- JAVA → v8
+- JDK → v1.8
+- mysql → v8.0.21
+- spring boot → v3.0.1
 
-🖱**Backend**
+**CI/CD**
 
-<img src="https://img.shields.io/badge/Spring Boot-green?style=flat&logo=Spring Boot&logoColor=white"/>
-<img src="https://img.shields.io/badge/Hibernate-black?style=flat&logo=Hibernate&logoColor=white"/>
-<img src="https://img.shields.io/badge/Spring Security-green?style=flat&logo=Spring Security&logoColor=white"/>
-<img src="https://img.shields.io/badge/WebRTC-black?style=flat&logo=WebRTC&logoColor=white"/>
-<img src="https://img.shields.io/badge/MySQL-blue?style=flat&logo=MySQL&logoColor=white"/>
+- AWS EC2
+- Jenkins
+- NGINX
+- SSL
 
-👀**Frontend**👀
+**Frontend**
 
-<img src="https://img.shields.io/badge/React-blue?style=flat&logo=React&logoColor=white"/>
-<img src="https://img.shields.io/badge/Redux-purple?style=flat&logo=Redux&logoColor=white"/>
-<img src="https://img.shields.io/badge/JavaScript-yellow?style=flat&logo=JavaScript&logoColor=white"/>
-<img src="https://img.shields.io/badge/styled_components-pink?style=flat&logo=styled-components&logoColor=white"/>
-
-
-🛠**Tools**🛠
-
-<img src="https://img.shields.io/badge/IntelliJ IDEA-purple?style=flat&logo=IntelliJ IDEA&logoColor=white"/>
-<img src="https://img.shields.io/badge/Visual Studio Code IDEA-blue?style=flat&logo=Visual Studio Code&logoColor=white"/>
-
-
-<img src="https://img.shields.io/badge/Visual Amazon AWS-yellow?style=flat&logo=Amazon AWS&logoColor=white"/>
-<img src="https://img.shields.io/badge/NGINX-grreen?style=flat&logo=NGINX&logoColor=white"/>
-<img src="https://img.shields.io/badge/Jenkins-orange?style=flat&logo=Jenkins&logoColor=white"/>
-<img src="https://img.shields.io/badge/Docker-blue?style=flat&logo=Docker&logoColor=white"/>
-
-
-<img src="https://img.shields.io/badge/GitHub-black?style=flat&logo=GitHub&logoColor=white"/>
-<img src="https://img.shields.io/badge/Jira Software-blue?style=flat&logo=Jira Software&logoColor=whie"/>
-<img src="https://img.shields.io/badge/Notion-black?style=flat&logo=Notion&logoColor=white"/>
-<img src="https://img.shields.io/badge/Mattermost-blue?style=flat&logo=Mattermost&logoColor=white"/>
-
-
+- Node.js → v16.0.0 (Openvidu 사용으로 인한 version 다운그레이드)
+- react → v18.2.0
+- Openvidu → 2.19.0
+- npm → v7.10.0
+- redux : v4.2.0
+- @reduxjs/toolkit : v1.9.1
+- react-redux : v8.0.5
+- redux-persist : v6.0.0
 
 
 ### ✨ EC2 포트 정리
