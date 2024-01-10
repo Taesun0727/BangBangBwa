@@ -1,5 +1,6 @@
 package com.bangbang.service;
 
+import com.bangbang.domain.sign.UserRoles;
 import com.bangbang.dto.sign.SignIn;
 import com.bangbang.dto.sign.FindPassword;
 import com.bangbang.domain.sign.User;
@@ -42,7 +43,7 @@ public class UserServiceImpl implements UserService {
                 .userEmail(SignUpInfo.getUserEmail())
                 .userNickname(SignUpInfo.getUserNickname())
                 .userPassword(passwordEncoder.encode(SignUpInfo.getUserPassword()))
-                .user_roles(Collections.singletonList("ROLE_USER"))
+                .user_roles(Collections.singletonList(UserRoles.ROLES_USER.getName()))
                 .user_status(1).build();
         userRepository.save(user);
 
