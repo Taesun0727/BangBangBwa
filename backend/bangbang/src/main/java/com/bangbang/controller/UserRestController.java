@@ -28,8 +28,7 @@ import java.util.Map;
 @Api(value="UserRestController-Version 1")
 public class UserRestController {
 
-  @Autowired
-  private UserServiceImpl userService;
+  private final UserServiceImpl userService;
 
   @GetMapping({"", "/"})
   public String index() {

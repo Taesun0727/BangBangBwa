@@ -23,10 +23,10 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class OauthServiceImpl extends DefaultOAuth2UserService {
 
-  @Autowired
-  private UserRepository userRepository;
-  @Autowired
-  private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+  private final UserRepository userRepository;
+
+  private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
   @Override
   public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {

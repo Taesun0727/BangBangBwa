@@ -22,12 +22,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class BroadcastService {
-  @Autowired
-  BroadcastRepository broadcastRepository;
-  @Autowired
-  ImageRepository imageRepository;
-  @Autowired
-  BroadcastQueryRepository broadcastQueryRepository;
+
+  private final BroadcastRepository broadcastRepository;
+
+  private final ImageRepository imageRepository;
+
+  private final BroadcastQueryRepository broadcastQueryRepository;
 
   // 방송 등록
   @Transactional

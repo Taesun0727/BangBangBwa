@@ -21,11 +21,8 @@ import java.util.List;
 @Api(value="BrokerController Version 1")
 @RequiredArgsConstructor
 public class BrokerRestController {
-    @Autowired
     private final BrokerService brokerService;
-    @Autowired
     private final UserService userService;
-    @Autowired
     private BrokerRepository brokerRepository;
 
     @ApiOperation(value="중개사 신청")

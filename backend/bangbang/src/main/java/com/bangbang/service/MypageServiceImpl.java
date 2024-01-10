@@ -18,13 +18,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MypageServiceImpl implements MypageService{
 
-    @Autowired
-    MypageRepository mypageRepository;
-    @Autowired
-    UserRepository userRepository;
+    private final MypageRepository mypageRepository;
+
+    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    @Autowired
-    private BrokerRepository brokerRepository;
+    private final BrokerRepository brokerRepository;
 
     @Override
     public User searchUser(Long userId) {
