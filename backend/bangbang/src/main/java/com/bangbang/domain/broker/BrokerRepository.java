@@ -12,8 +12,8 @@ import java.util.List;
 public interface BrokerRepository extends JpaRepository<Broker, Long> {
     @Query("select b from Broker b where b.userId=:userId")
     Broker findByUserId(@Param("userId") Long userId);
-    @Query("select new com.bangbang.dto.broker.BrokerResponseDto(b) " +
-            "from Broker b, UserRoles u " +
-            "where b.brokerStatus = 0 and u.pk.userUserId = b.userId and u.pk.userRoles = 'ROLE_USER'")
-    List<BrokerResponseDto> findBrokerBefore();
+//    @Query("select new com.bangbang.dto.broker.BrokerResponseDto(b) " +
+//            "from Broker b, UserRoles u " +
+//            "where b.brokerStatus = 0 and u.pk.userUserId = b.userId and u.pk.userRoles = 'ROLE_USER'")
+//    List<BrokerResponseDto> findBrokerBefore();
 }

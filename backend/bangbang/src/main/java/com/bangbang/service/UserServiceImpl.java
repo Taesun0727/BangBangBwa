@@ -143,8 +143,8 @@ public class UserServiceImpl implements UserService {
         return Long.valueOf(jwtTokenProvider.getUserId(token));
     }
 
-    @Override
-    public List<UserDto> findAllUsers() throws Exception {
-        return userRepository.findAllUsers();
-    }
+//    @Override
+//    public List<UserDto> findAllUsers() throws Exception {
+//        return userRepository.findAllUsers();
+//    }
 }
