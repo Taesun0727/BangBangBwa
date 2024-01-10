@@ -7,18 +7,19 @@ import com.bangbang.domain.interest.InterestitemRepository;
 import com.bangbang.domain.item.Item;
 import com.bangbang.dto.interest.InterestareaSaveRequestDto;
 import com.bangbang.dto.interest.InterestitemSaveRequestDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class InterestServiceImpl implements InterestService{
 
-    @Autowired
-    InterestitemRepository interestitemRepository;
-    @Autowired
-    InterestareaRepository interestareaRepository;
+    private final InterestitemRepository interestitemRepository;
+
+    private final InterestareaRepository interestareaRepository;
     @Override
     public void newInterestArea(InterestareaSaveRequestDto area) {
         interestareaRepository.save(area.toEntity());

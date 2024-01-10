@@ -32,13 +32,8 @@ import javax.servlet.http.HttpServletRequest;
 @Api(value="ItemController Version 1")
 public class ItemRestController {
 
-    @Autowired
     private final ItemService itemService;
-
-    @Autowired
     private final UserService userService;
-
-    @Autowired
     private final BrokerRepository brokerRepository;
 
     @ApiImplicitParams({

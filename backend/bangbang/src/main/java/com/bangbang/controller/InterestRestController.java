@@ -21,9 +21,8 @@ import javax.servlet.http.HttpServletRequest;
 @Api(value="InterestController Version 1")
 @RequiredArgsConstructor
 public class InterestRestController {
-    @Autowired
+
     private final InterestService interestService;
-    @Autowired
     private final UserService userService;
 
 

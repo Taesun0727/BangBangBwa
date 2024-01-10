@@ -20,11 +20,8 @@ import javax.transaction.Transactional;
 @RequiredArgsConstructor
 public class NoticeServiceImpl implements NoticeService{
 
-    @Autowired
-    private NoticeRepository noticeRepository;
-
-    @Autowired
-    private ImageRepository imageRepository;
+    private final NoticeRepository noticeRepository;
+    private final ImageRepository imageRepository;
 
     @Transactional
     @Override

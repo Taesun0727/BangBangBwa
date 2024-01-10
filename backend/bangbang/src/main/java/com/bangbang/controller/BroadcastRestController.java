@@ -25,8 +25,7 @@ import java.util.List;
 @Api(value="BroadcastRestController-Version 1")
 public class BroadcastRestController {
 
-  @Autowired
-  BroadcastService broadcastService;
+  private final BroadcastService broadcastService;
 
   //방송 등록
   @ApiOperation(value = "방송 등록", notes = "방송을 등록합니다.")

@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 
 import com.bangbang.domain.item.Item;
 import com.bangbang.domain.item.ItemRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,22 +18,22 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class ItemServiceImpl implements ItemService {
 
-    @Autowired
-    private ItemRepository itemRepository;
-    @Autowired
-    private OptionRepository optionRepository;
-    @Autowired
-    private ManageOptionRepository manageOptionRepository;
-    @Autowired
-    private ItemPriceRepository itemPriceRepository;
-    @Autowired
-    private SidoCodeRepository sidoCodeRepository;
-    @Autowired
-    private GugunCodeRepository gugunCodeRepository;
-    @Autowired
-    private DongCodeRepository dongCodeRepository;
+    private final ItemRepository itemRepository;
+
+    private final OptionRepository optionRepository;
+
+    private final ManageOptionRepository manageOptionRepository;
+
+    private final ItemPriceRepository itemPriceRepository;
+
+    private final SidoCodeRepository sidoCodeRepository;
+
+    private final GugunCodeRepository gugunCodeRepository;
+
+    private final DongCodeRepository dongCodeRepository;
 
     @Transactional
     @Override

@@ -29,13 +29,13 @@ import java.util.List;
 @RequiredArgsConstructor
 @Api(value="MypageController Version 1")
 public class MyPageRestController {
-    @Autowired
+
     private final MypageService mypageService;
-    @Autowired
+
     private final UserService userService;
-    @Autowired
+
     private final BrokerRepository brokerRepository;
-    @Autowired
+
     private final UserRepository userRepository;
 
 
