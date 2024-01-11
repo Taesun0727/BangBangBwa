@@ -126,19 +126,19 @@ public class Item {
     @Column(nullable = true)
     private Integer item_toilet;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinTable(name="item_price",
             joinColumns = @JoinColumn(name="item_id"),
             inverseJoinColumns = @JoinColumn(name="item_id"))
     private ItemPrice itemPrice;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinTable(name="manage_option",
             joinColumns = @JoinColumn(name="item_id"),
             inverseJoinColumns =  @JoinColumn(name="item_id"))
     private ManageOption manageOption;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinTable(name="options",
             joinColumns = @JoinColumn(name="item_id"),
             inverseJoinColumns =  @JoinColumn(name="item_id"))
