@@ -1,6 +1,7 @@
 package com.bangbang.controller;
 
 import com.bangbang.domain.broker.BrokerRepository;
+import com.bangbang.domain.item.Item;
 import com.bangbang.dto.item.*;
 import com.bangbang.service.ItemService;
 import com.bangbang.service.UserService;
@@ -82,9 +83,9 @@ public class ItemRestController {
     public ResponseEntity<?> searchItemAll(@RequestParam(defaultValue="0") Integer page,
                                            @RequestParam(defaultValue="12") Integer size) {
         try {
-            Page<ItemDto> item = itemService.searchItemAll(page, size);
+            Page<Item> item = itemService.searchItemAll(page, size);
             if (item != null && item.hasContent())
-                return new ResponseEntity<Page<ItemDto>>(item, HttpStatus.OK);
+                return new ResponseEntity<Page<Item>>(item, HttpStatus.OK);
             else return new ResponseEntity(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return exceptionHandling();

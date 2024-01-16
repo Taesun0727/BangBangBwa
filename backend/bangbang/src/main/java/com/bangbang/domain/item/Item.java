@@ -112,10 +112,7 @@ public class Item {
     private boolean item_deal_complete;
 
     @Column(nullable = false)
-    @JoinTable(name="broker",
-            joinColumns = @JoinColumn(name="broker_id"),
-            inverseJoinColumns = @JoinColumn(name="broker_id"))
-    private long broker_id; //FK
+    private long brokerId; //FK
 
     @Column(nullable = true)
     private Integer item_status;
