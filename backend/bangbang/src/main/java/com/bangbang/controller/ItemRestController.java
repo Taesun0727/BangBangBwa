@@ -13,6 +13,8 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
+import java.util.SortedMap;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -80,12 +82,12 @@ public class ItemRestController {
 
     @ApiOperation(value="매물 전체 검색 (pagination)")
     @GetMapping("/items")
-    public ResponseEntity<?> searchItemAll(@RequestParam(defaultValue="0") Integer page,
-                                           @RequestParam(defaultValue="12") Integer size) {
+    public ResponseEntity<?> searchItemAll(@RequestParam(defaultValue="0") Long item_id,
+                                           @RequestParam(defaultValue="20") Integer size) {
         try {
-            Page<Item> item = itemService.searchItemAll(page, size);
-            if (item != null && item.hasContent())
-                return new ResponseEntity<Page<Item>>(item, HttpStatus.OK);
+            List<Item> item = itemService.searchItemAll(item_id, size);
+            if (item != null && !item.isEmpty())
+                return new ResponseEntity<List<Item>>(item, HttpStatus.OK);
             else return new ResponseEntity(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return exceptionHandling();

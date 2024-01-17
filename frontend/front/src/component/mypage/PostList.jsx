@@ -32,7 +32,7 @@ function PostList(props) {
       {posts.map((post, index) => {
         return (
           <PostListItem
-            key={post.item.item_id}
+            key={post.item_id}
             post={post}
             onClick={() => {
               onClickItem(post);

@@ -35,6 +35,8 @@ public class ItemServiceImpl implements ItemService {
 
     private final DongCodeRepository dongCodeRepository;
 
+    private final ItemRepositorySupport itemRepositorySupport;
+
     @Transactional
     @Override
     public long newItem(ItemSaveRequestDto item) {
@@ -62,10 +64,17 @@ public class ItemServiceImpl implements ItemService {
         itemPriceRepository.save(itemPrice.toEntity());
     }
 
+//    @Override
+//    public Page<Item> searchItemAll(Integer page, Integer size) {
+//        Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "item_id");
+//        return itemRepository.findAllItem(pageable);
+//    }
+
     @Override
-    public Page<ItemDto> searchItemAll(Integer page, Integer size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "item_id");
-        return itemRepository.findAllItem(pageable);
+    public List<Item> searchItemAll(long item_id, Integer size) {
+        if (item_id == 0) item_id = Long.MAX_VALUE;
+
+        return itemRepositorySupport.findItemLimit20(item_id, size);
     }
 
     @Override
