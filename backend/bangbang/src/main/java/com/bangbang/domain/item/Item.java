@@ -8,7 +8,7 @@ import lombok.experimental.SuperBuilder;
 
 @Data
 @Entity
-@Table(name="item")
+@Table(name="item", indexes = {@Index(name="idx_sido_gugun_dong", columnList ="item_eubmyundongcode, item_dongcode")})
 @NoArgsConstructor
 @SuperBuilder
 public class Item {

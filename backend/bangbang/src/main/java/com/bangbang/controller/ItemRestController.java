@@ -234,12 +234,15 @@ public class ItemRestController {
     }
 
     @ApiOperation(value="시,구,동 기준으로 매물 조회")
-    @GetMapping("/items/sigudongAll/{dongCode}")
-    public ResponseEntity<?> sigudongAll(@PathVariable("dongCode") String dongCode) {
+    @GetMapping("/items/search")
+    public ResponseEntity<?> sigudongAll(
+            @RequestParam(name = "sidoCode", required = true) String sidoCode,
+            @RequestParam(name = "gugunCode", required = false) String gugunCode,
+            @RequestParam(name = "dongCode", required = false) String dongCode) {
         try {
-            List<ItemDto> list = itemService.searchSiGuDongAll(dongCode);
+            List<Item> list = itemService.searchSiGuDongAll(sidoCode, gugunCode, dongCode);
             if (list != null)
-                return new ResponseEntity<List<ItemDto>>(list, HttpStatus.OK);
+                return new ResponseEntity<List<Item>>(list, HttpStatus.OK);
             else return new ResponseEntity(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return exceptionHandling();

@@ -13,7 +13,7 @@ public interface ItemService {
     void newItemPrice(ItemPriceSaveRequestDto itemPrice, long item_id);
 //    Page<Item> searchItemAll(Integer page, Integer size);
     List<Item> searchItemAll(long item_id, Integer size);
-    List<ItemDto> searchSiGuDongAll(String dongCode);
+    List<Item> searchSiGuDongAll(String siCode, String gugunCode,String dongCode);
     List<SidoDto> getSido();
     List<GugunDto> getGugunInSido(String sidoCode);
     List<DongDto> getDongInGugun(String gugunCode);

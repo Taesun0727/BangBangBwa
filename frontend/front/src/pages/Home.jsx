@@ -23,21 +23,21 @@ const Container = styled.div`
 function Home() {
   const dispatch = useDispatch();
 
-  const { items } = useSelector((state) => state.itemSlice);
+  const { items, lastId } = useSelector((state) => state.itemSlice);
   const { liveBroadcast } = useSelector((state) => state.broadcastSlice);
 
   useEffect(() => {
     dispatch(initBroadcastState())
     dispatch(SearchItemAsync(
       {
-        page: 0,
-        size: 12,
+        lastId,
+        size: 20,
       }
     ))
     dispatch(SearchLiveBroadcastAsync(
       {
         page: 0,
-        size: 12,
+        size: 20,
       }
     ))
   },[])

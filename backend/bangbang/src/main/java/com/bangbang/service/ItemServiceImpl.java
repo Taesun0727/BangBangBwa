@@ -78,8 +78,13 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<ItemDto> searchSiGuDongAll(String dongCode) {
-        return itemRepository.findByDongCode(dongCode);
+    public List<Item> searchSiGuDongAll(String siCode, String gugunCode, String dongCode) {
+        siCode = String.format("%-10s", siCode).replace(" ", "0");
+        if (gugunCode != "") {
+            gugunCode = String.format("%-10s", gugunCode).replace(" ", "0");
+        }
+
+        return itemRepositorySupport.findSearchItems(siCode, gugunCode, dongCode);
     }
 
     @Override
