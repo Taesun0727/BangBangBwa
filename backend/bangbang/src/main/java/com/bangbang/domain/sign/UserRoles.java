@@ -1,18 +1,17 @@
 package com.bangbang.domain.sign;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+public enum UserRoles {
+    ROLES_USER("ROLE_USER"),
+    ROLES_BROKER("ROLE_BROKER"),
+    ROLES_ADMIN("ROLE_ADMIN");
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+    private final String name;
 
-@Entity
-@Table(name = "user_user_roles")
-@AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class UserRoles {
-    @EmbeddedId
-    private Pk pk;
+    public String getName() {
+        return name;
+    }
+
+    UserRoles(String name) {
+        this.name = name;
+    }
 }

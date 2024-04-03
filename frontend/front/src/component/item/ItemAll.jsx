@@ -42,15 +42,15 @@ function Items() {
     navigate("/writeitems")
   }
 
-  const { items, last, currentPage } = useSelector((state) => state.itemSlice);
+  const { items, last, lastId } = useSelector((state) => state.itemSlice);
   const { me } = useSelector((state) => state.userSlice);
 
   useEffect(() => {
     dispatch(initItemState())
     dispatch(SearchItemAsync(
       {
-        page: 0,
-        size: 12,
+        lastId,
+        size: 20,
       }
     ))
   },[])
@@ -58,8 +58,8 @@ function Items() {
   const loadItem = () => {
     dispatch(SearchItemAsync(
       {
-        page: currentPage,
-        size: 12,
+        lastId,
+        size: 20,
       }
     ))
   }

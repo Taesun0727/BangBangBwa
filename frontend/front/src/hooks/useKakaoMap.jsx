@@ -5,20 +5,20 @@ function useKakaoMap(item) {
     var marker = [
       {
         position: new window.kakao.maps.LatLng(
-          item.item.item_lng,
-          item.item.item_lat
+          item.item_lng,
+          item.item_lat
         ),
-        text: item.item.item_title,
+        text: item.item_title,
       },
     ];
     
     // 카카오 지도
-    var mapContainer = document.getElementById(item.item.item_id);
+    var mapContainer = document.getElementById(item.item_id);
 
     var options = {
       center: new window.kakao.maps.LatLng(
-        item.item.item_lng,
-        item.item.item_lat
+        item.item_lng,
+        item.item_lat
       ),
       level: 5,
       marker: marker,

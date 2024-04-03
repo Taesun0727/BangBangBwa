@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 
 import com.bangbang.domain.item.Item;
 import com.bangbang.domain.item.ItemRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,22 +18,24 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class ItemServiceImpl implements ItemService {
 
-    @Autowired
-    private ItemRepository itemRepository;
-    @Autowired
-    private OptionRepository optionRepository;
-    @Autowired
-    private ManageOptionRepository manageOptionRepository;
-    @Autowired
-    private ItemPriceRepository itemPriceRepository;
-    @Autowired
-    private SidoCodeRepository sidoCodeRepository;
-    @Autowired
-    private GugunCodeRepository gugunCodeRepository;
-    @Autowired
-    private DongCodeRepository dongCodeRepository;
+    private final ItemRepository itemRepository;
+
+    private final OptionRepository optionRepository;
+
+    private final ManageOptionRepository manageOptionRepository;
+
+    private final ItemPriceRepository itemPriceRepository;
+
+    private final SidoCodeRepository sidoCodeRepository;
+
+    private final GugunCodeRepository gugunCodeRepository;
+
+    private final DongCodeRepository dongCodeRepository;
+
+    private final ItemRepositorySupport itemRepositorySupport;
 
     @Transactional
     @Override
@@ -61,15 +64,27 @@ public class ItemServiceImpl implements ItemService {
         itemPriceRepository.save(itemPrice.toEntity());
     }
 
+//    @Override
+//    public Page<Item> searchItemAll(Integer page, Integer size) {
+//        Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "item_id");
+//        return itemRepository.findAllItem(pageable);
+//    }
+
     @Override
-    public Page<ItemDto> searchItemAll(Integer page, Integer size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "item_id");
-        return itemRepository.findAllItem(pageable);
+    public List<Item> searchItemAll(long item_id, Integer size) {
+        if (item_id == 0) item_id = Long.MAX_VALUE;
+
+        return itemRepositorySupport.findItemLimit20(item_id, size);
     }
 
     @Override
-    public List<ItemDto> searchSiGuDongAll(String dongCode) {
-        return itemRepository.findByDongCode(dongCode);
+    public List<Item> searchSiGuDongAll(String siCode, String gugunCode, String dongCode) {
+        siCode = String.format("%-10s", siCode).replace(" ", "0");
+        if (gugunCode != "") {
+            gugunCode = String.format("%-10s", gugunCode).replace(" ", "0");
+        }
+
+        return itemRepositorySupport.findSearchItems(siCode, gugunCode, dongCode);
     }
 
     @Override

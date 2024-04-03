@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @Api(value="SearchRestController-Version 1")
 public class SearchRestController {
-  @Autowired
   private final SearchService searchService;
 
   @ApiOperation(value="키워드 검색")

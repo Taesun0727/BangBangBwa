@@ -21,9 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequiredArgsConstructor
 public class NoticeRestController {
 
-    @Autowired
     private final NoticeService noticeService;
-    @Autowired
     private final UserService userService;
 
     @ApiOperation(value="공지사항 등록")

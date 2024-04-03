@@ -22,15 +22,14 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class BookmarkService {
-  @Autowired
-  UserRepository userRepository;
+
+  private final UserRepository userRepository;
 
   private final JwtTokenProvider jwtTokenProvider;
-  @Autowired
-  DongCodeRepository dongCodeRepository;
 
-  @Autowired
-  BookmarkRepository bookmarkRepository;
+  private final DongCodeRepository dongCodeRepository;
+
+  private final BookmarkRepository bookmarkRepository;
 
   //즐겨찾기 전체 조회
   public List<BookmarkListResponseDto> searchBookmarkUser(long uId){

@@ -1,6 +1,7 @@
 package com.bangbang.controller;
 
 import com.bangbang.domain.broker.BrokerRepository;
+import com.bangbang.domain.item.Item;
 import com.bangbang.dto.item.*;
 import com.bangbang.service.ItemService;
 import com.bangbang.service.UserService;
@@ -12,6 +13,8 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
+import java.util.SortedMap;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -32,13 +35,8 @@ import javax.servlet.http.HttpServletRequest;
 @Api(value="ItemController Version 1")
 public class ItemRestController {
 
-    @Autowired
     private final ItemService itemService;
-
-    @Autowired
     private final UserService userService;
-
-    @Autowired
     private final BrokerRepository brokerRepository;
 
     @ApiImplicitParams({
@@ -84,12 +82,12 @@ public class ItemRestController {
 
     @ApiOperation(value="매물 전체 검색 (pagination)")
     @GetMapping("/items")
-    public ResponseEntity<?> searchItemAll(@RequestParam(defaultValue="0") Integer page,
-                                           @RequestParam(defaultValue="12") Integer size) {
+    public ResponseEntity<?> searchItemAll(@RequestParam(defaultValue="0") Long item_id,
+                                           @RequestParam(defaultValue="20") Integer size) {
         try {
-            Page<ItemDto> item = itemService.searchItemAll(page, size);
-            if (item != null && item.hasContent())
-                return new ResponseEntity<Page<ItemDto>>(item, HttpStatus.OK);
+            List<Item> item = itemService.searchItemAll(item_id, size);
+            if (item != null && !item.isEmpty())
+                return new ResponseEntity<List<Item>>(item, HttpStatus.OK);
             else return new ResponseEntity(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return exceptionHandling();
@@ -236,12 +234,15 @@ public class ItemRestController {
     }
 
     @ApiOperation(value="시,구,동 기준으로 매물 조회")
-    @GetMapping("/items/sigudongAll/{dongCode}")
-    public ResponseEntity<?> sigudongAll(@PathVariable("dongCode") String dongCode) {
+    @GetMapping("/items/search")
+    public ResponseEntity<?> sigudongAll(
+            @RequestParam(name = "sidoCode", required = true) String sidoCode,
+            @RequestParam(name = "gugunCode", required = false) String gugunCode,
+            @RequestParam(name = "dongCode", required = false) String dongCode) {
         try {
-            List<ItemDto> list = itemService.searchSiGuDongAll(dongCode);
+            List<Item> list = itemService.searchSiGuDongAll(sidoCode, gugunCode, dongCode);
             if (list != null)
-                return new ResponseEntity<List<ItemDto>>(list, HttpStatus.OK);
+                return new ResponseEntity<List<Item>>(list, HttpStatus.OK);
             else return new ResponseEntity(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return exceptionHandling();

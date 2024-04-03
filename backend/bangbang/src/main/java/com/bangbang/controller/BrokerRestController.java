@@ -21,12 +21,9 @@ import java.util.List;
 @Api(value="BrokerController Version 1")
 @RequiredArgsConstructor
 public class BrokerRestController {
-    @Autowired
     private final BrokerService brokerService;
-    @Autowired
     private final UserService userService;
-    @Autowired
-    private BrokerRepository brokerRepository;
+    private final BrokerRepository brokerRepository;
 
     @ApiOperation(value="중개사 신청")
     @PostMapping("/user/brokers/new")
@@ -43,18 +40,18 @@ public class BrokerRestController {
         }
     }
 
-    @ApiOperation(value="중개사 신청 조회")
-    @GetMapping("/admin/brokers")
-    public ResponseEntity<?> searchBrokerAll() {
-        try {
-            List<BrokerResponseDto> list = brokerService.searchBrokerAll();
-            if (list != null && !list.isEmpty())
-                return new ResponseEntity<List<BrokerResponseDto>>(list, HttpStatus.OK);
-            else return new ResponseEntity(HttpStatus.NO_CONTENT);
-        } catch (Exception e) {
-            return exceptionHandling();
-        }
-    }
+//    @ApiOperation(value="중개사 신청 조회")
+//    @GetMapping("/admin/brokers")
+//    public ResponseEntity<?> searchBrokerAll() {
+//        try {
+//            List<BrokerResponseDto> list = brokerService.searchBrokerAll();
+//            if (list != null && !list.isEmpty())
+//                return new ResponseEntity<List<BrokerResponseDto>>(list, HttpStatus.OK);
+//            else return new ResponseEntity(HttpStatus.NO_CONTENT);
+//        } catch (Exception e) {
+//            return exceptionHandling();
+//        }
+//    }
 
     @ApiOperation(value="중개사 등록")
     @PatchMapping("/admin/brokers/register/{userId}")

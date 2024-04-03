@@ -6,19 +6,19 @@ import com.bangbang.domain.sign.User;
 import com.bangbang.domain.sign.UserRepository;
 import com.bangbang.dto.broker.BrokerResponseDto;
 import com.bangbang.dto.broker.BrokerSaveRequestDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
 @Service
+@RequiredArgsConstructor
 public class BrokerServiceImpl implements BrokerService{
 
-    @Autowired
-    BrokerRepository brokerRepository;
+    private final BrokerRepository brokerRepository;
 
-    @Autowired
-    UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Transactional
     @Override
@@ -26,10 +26,10 @@ public class BrokerServiceImpl implements BrokerService{
         brokerRepository.save(broker.toEntity());
     }
 
-    @Override
-    public List<BrokerResponseDto> searchBrokerAll() {
-        return brokerRepository.findBrokerBefore();
-    }
+//    @Override
+//    public List<BrokerResponseDto> searchBrokerAll() {
+//        return brokerRepository.findBrokerBefore();
+//    }
 
     @Transactional
     @Override

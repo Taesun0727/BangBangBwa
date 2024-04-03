@@ -39,7 +39,7 @@ export const initialState = {
   items: null,
   itemDetail: null,
   last: false,
-  currentPage: 0,
+  lastId: 0,
 
 };
 
@@ -75,8 +75,9 @@ export const SearchItemAsync = createAsyncThunk(
   'item/NEXT_SEARCH_ITEM',
   async (data, thunkAPI) => {
     try {
+      console.log(data.lastId, data.size)
       const response = await axios.get(
-        `/items?page=${data.page}&size=${data.size}`, data
+        `/items?item_id=${data.lastId}&size=${data.size}`, data
       );
       return response.data
     } catch (err) {
@@ -190,7 +191,7 @@ const itemSlice = createSlice({
   reducers: {
     initItemState: (state) => {
       state.items = null;
-      state.currentPage = 0;
+      state.lastId = 0;
       state.last = false;
       state.itemDetail = null;
     },
@@ -258,6 +259,7 @@ const itemSlice = createSlice({
       state.searchMyItemLoading = false;
       state.searchMyItemDone = true;
       state.myItem = action.payload
+      console.log(action.payload)
     });
     builder.addCase(searchMyItemAsync.rejected, (state, action) => {
       state.searchMyItemLoading = false;
@@ -271,13 +273,16 @@ const itemSlice = createSlice({
     builder.addCase(SearchItemAsync.fulfilled, (state, action) => {
       state.searchItemLoading = false;
       state.searchItemDone = true;
-      if (state.items === null) {
-        state.items = action.payload.content;
-      } else {
-        state.items = state.items.concat(action.payload.content)
+      if (action.payload.length !== 21) {
+        state.last = true
       }
-      state.currentPage += 1;
-      state.last = action.payload.last
+      state.lastId = action.payload[action.payload.length - 1].item_id;
+      action.payload.pop()
+      if (state.items === null) {
+        state.items = action.payload;
+      } else {
+        state.items = state.items.concat(action.payload.slice(0, 20))
+      }
     });
     builder.addCase(SearchItemAsync.rejected, (state, action) => {
       state.searchItemLoading = false;

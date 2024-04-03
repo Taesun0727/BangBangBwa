@@ -5,6 +5,7 @@ import java.util.List;
 import com.bangbang.dto.item.ItemDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -21,8 +22,10 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
             "order by i.item_id desc")
 
     @Transactional(readOnly = true)
-    Page<ItemDto> findAllItem(Pageable pageable);
+    Page<Item> findAllItem(Pageable pageable);
 
+    @EntityGraph(attributePaths = {"manageOption", "itemPrice", "options"})
+    List<Item> findItemByBrokerId(Long brokerId);
 
     @Transactional(readOnly = true)
     @Query("select new com.bangbang.dto.item.ItemDto(i, ip, m, o) " +

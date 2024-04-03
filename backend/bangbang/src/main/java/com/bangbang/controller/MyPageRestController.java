@@ -1,6 +1,7 @@
 package com.bangbang.controller;
 
 import com.bangbang.domain.broker.BrokerRepository;
+import com.bangbang.domain.item.Item;
 import com.bangbang.domain.sign.User;
 import com.bangbang.domain.sign.UserRepository;
 import com.bangbang.dto.broadcast.BroadcastListResponseDto;
@@ -23,19 +24,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @Api(value="MypageController Version 1")
 public class MyPageRestController {
-    @Autowired
+
     private final MypageService mypageService;
-    @Autowired
+
     private final UserService userService;
-    @Autowired
+
     private final BrokerRepository brokerRepository;
-    @Autowired
+
     private final UserRepository userRepository;
 
 
@@ -64,9 +66,9 @@ public class MyPageRestController {
             String token = request.getHeader("X-AUTH-TOKEN").substring(7);
             Long uid = userService.findUserId(token);
             Long brokerId = brokerRepository.findByUserId(uid).getBrokerId();
-            List<ItemDto> item = mypageService.searchMyItem(brokerId);
+            List<Item> item = mypageService.searchMyItem(brokerId);
             if (item != null && !item.isEmpty())
-                return new ResponseEntity<List<ItemDto>>(item, HttpStatus.OK);
+                return new ResponseEntity<List<Item>>(item, HttpStatus.OK);
             else return new ResponseEntity(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return exceptionHandling();
