@@ -51,34 +51,41 @@ function ItemSearchAll() {
   const [broadcasts, setBroadcasts] = useState('');
   const [items, setItems] = useState('');
   const { searchWord } = useParams();
-  const [keyword, dongCode] = searchWord.split('&');
+  const [keyword, sidoCode, gugunCode, dongCode] = searchWord.split('&');
   useEffect(() => {
-    const baseURL = '/search?'
+    const baseURL = '/items/search?'
+      console.log(searchWord)
+      axios.get(`${baseURL}sidoCode=${sidoCode}&gugunCode=${gugunCode}&dongCode=${dongCode}&keyword=${keyword}`)
+        .then(res => {
+          console.log(res.data)
+          setItems(res.data)
+          setBroadcasts(res.data.dataD)
+        })
+        .catch(err => console.log(err))
 
-    if (keyword && dongCode) {
-      axios.get(`${baseURL}dongCode=${dongCode}&keyword=${keyword}`)
-      .then(res => {
-        setItems(res.data.dataB)
-        setBroadcasts(res.data.dataD)
-      })
-      .catch(err => console.log(err))
+      // if (keyword && dongCode) {
+      //   axios.get(`${baseURL}dongCode=${dongCode}&keyword=${keyword}`)
+      //   .then(res => {
+      //     setItems(res.data.dataB)
+      //     setBroadcasts(res.data.dataD)
+      //   })
+      //   .catch(err => console.log(err))
       
-    } else if (keyword) {
-      axios.get(`${baseURL}keyword=${keyword}`)
-      .then(res => {
-        setItems(res.data.dataB)
-        setBroadcasts(res.data.dataD)
-      })
-      .catch(err => console.log(err))
-    } else if (dongCode) {
-      axios.get(`${baseURL}dongCode=${dongCode}`)
-      .then(res => {
-        setItems(res.data.dataB)
-        setBroadcasts(res.data.dataD)
-      })
-      .catch(err => console.log(err))  
-    }
-
+      // } else if (keyword) {
+      //   axios.get(`${baseURL}keyword=${keyword}`)
+      //   .then(res => {
+      //     setItems(res.data.dataB)
+      //     setBroadcasts(res.data.dataD)
+      //   })
+      //   .catch(err => console.log(err))
+      // } else if (dongCode) {
+      //   axios.get(`${baseURL}dongCode=${dongCode}`)
+      //   .then(res => {
+      //     setItems(res.data.dataB)
+      //     setBroadcasts(res.data.dataD)
+      //   })
+      //   .catch(err => console.log(err))  
+      // }
   }, [keyword, dongCode])
 
   return (

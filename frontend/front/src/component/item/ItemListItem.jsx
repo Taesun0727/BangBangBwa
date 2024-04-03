@@ -48,8 +48,8 @@ const SCardContentP = styled.p`
 function ItemListItem(props) {
   const dispatch = useDispatch();
   const item = props.posts
-  const itemType = (item.item.item_type === 0) ? '원룸' : (item.item.item_type === 1) ? '투,쓰리룸' : (item.item.item_type === 2) ? '오피스텔' : '아파트'
-  const dealType = (item.item.item_deal_type === 0) ? '월세' : (item.item.item_deal_type === 0) ? '전세' : '매매'
+  const itemType = (item.item_type === '0') ? '원룸' : (item.item_type === '1') ? '투,쓰리룸' : (item.item_type === 2) ? '오피스텔' : '아파트'
+  const dealType = (item.item_deal_type === 0) ? '월세' : (item.item_deal_type === 0) ? '전세' : '매매'
   const price = (dealType === '월세') ? `${item.itemPrice.item_price_month_deposit}/${item.itemPrice.item_price_month_rent}` : (dealType === '전세') ? item.itemPrice.item_price_house_deposit : item.itemPrice.item_price_buy_house
 
   useKakaoMap(item);
@@ -59,14 +59,14 @@ function ItemListItem(props) {
   }
 
   const onClick = () => {
-    dispatch(searchDetailItemAsync(props.posts.item.item_id))
+    dispatch(searchDetailItemAsync(props.posts.item_id))
   }
   
   return (
-      <SCardDiv onDoubleClick={onClick}>
-        <SImgDiv onClick={imgClick} id={item.item.item_id}> </SImgDiv>
+      <SCardDiv >
+        <SImgDiv onClick={imgClick} id={item.item_id}> </SImgDiv>
         <SCardBodyDiv>
-          <SCardTitleP>{props.posts.item.item_title}</SCardTitleP>
+          <SCardTitleP onClick={onClick}>{item.item_title}</SCardTitleP>
           <SCardContentP>
             {itemType} |&nbsp;
             {dealType} |&nbsp;

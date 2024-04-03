@@ -56,15 +56,15 @@ function PostListItem(props) {
   const navigate = useNavigate();
 
   const ifnoItem = () => {
-    dispatch(searchDetailItemAsync(props.post.item.item_id))
+    dispatch(searchDetailItemAsync(props.post.item_id))
   }
   const modify = () => {
     dispatch(choiceItemDetail(props.post))
-    navigate(`/items/modify/${props.post.item.item_id}`)
+    navigate(`/items/modify/${props.post.item_id}`)
   }
   const deleteItem = () => {
-    dispatch(DeleteItemAsync(props.post.item.item_id))
-    dispatch(deleteMyItem(props.post.item.item_id))
+    dispatch(DeleteItemAsync(props.post.item_id))
+    dispatch(deleteMyItem(props.post.item_id))
     Swal.fire({
       icon: 'success',
       title: '매물 삭제 성공!',
@@ -79,11 +79,11 @@ function PostListItem(props) {
         <SItemImg src={itemImage} alt="이미지샘플"/>
       </div>
       <STextDiv>
-        <STitleTextP>{props.post.item.item_title}</STitleTextP>
+        <STitleTextP>{props.post.item_title}</STitleTextP>
         <SContentDiv>
-          <SContentTextP>{props.post.item.item_type}</SContentTextP>
-          <SContentTextP>{props.post.item.item_building_type}</SContentTextP>
-          <SContentTextP>{props.post.item.item_manage_fee}</SContentTextP>
+          <SContentTextP>{props.post.item_type}</SContentTextP>
+          <SContentTextP>{props.post.item_building_type}</SContentTextP>
+          <SContentTextP>{props.post.item_manage_fee}</SContentTextP>
         </SContentDiv>
       </STextDiv>
       <STextDiv>
