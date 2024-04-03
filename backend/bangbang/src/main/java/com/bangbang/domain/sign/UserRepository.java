@@ -18,8 +18,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Transactional(readOnly = true)
     User findByUserId(Long uid);
 
-    @Query("select new com.bangbang.dto.sign.UserDto(u, r.pk.userRoles) " +
-            "from User u, UserRoles r " +
-            "where u.userId = r.pk.userUserId")
-    List<UserDto> findAllUsers();
+//    @Query("select new com.bangbang.dto.sign.UserDto(u, r.pk.userRoles) " +
+//            "from User u, UserRoles r " +
+//            "where u.userId = r.pk.userUserId")
+//    List<UserDto> findAllUsers();
 }

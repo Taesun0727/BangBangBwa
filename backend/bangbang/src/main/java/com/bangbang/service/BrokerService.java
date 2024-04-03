@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface BrokerService {
     void newBroker(BrokerSaveRequestDto broker);
-    List<BrokerResponseDto> searchBrokerAll();
+//    List<BrokerResponseDto> searchBrokerAll();
     void registerBroker(Long userId);
     void deactiveBroker(Long brokerId);
 }
