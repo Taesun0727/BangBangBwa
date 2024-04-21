@@ -35,20 +35,20 @@ public class User implements UserDetails {
   @Column(length = 10, nullable = false, name = "user_nickname")
   private String userNickname;             // 유저 닉네임
 
-  @Column(length = 100, nullable = true)
-  private String user_refresh_token; // 토큰
+  @Column(length = 100, nullable = true, name = "user_refresh_token")
+  private String userRefreshToken; // 토큰
    // 유저 등급
 
   @Column(length = 1, nullable = true)
-  private int user_status;             // 유저 상태
+  private int userStatus;             // 유저 상태
 
   @ElementCollection(fetch = FetchType.EAGER)
   @Builder.Default
-  private List<String> user_roles = new ArrayList<>();
+  private List<String> userRoles = new ArrayList<>();
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    return this.user_roles.stream()
+    return this.userRoles.stream()
             .map(SimpleGrantedAuthority::new)
             .collect(Collectors.toList());
   }
