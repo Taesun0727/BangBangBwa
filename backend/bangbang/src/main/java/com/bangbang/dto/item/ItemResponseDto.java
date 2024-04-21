@@ -85,7 +85,7 @@ public class ItemResponseDto {
         this.item_lng = entity.getItem_lng();
         this.item_lat = entity.getItem_lat();
         this.item_deal_complete = entity.isItem_deal_complete();
-        this.broker_id = entity.getBroker_id();
+        this.broker_id = entity.getBrokerId();
         this.item_status = entity.getItem_status();
         this.item_room = entity.getItem_room();
         this.item_toilet = entity.getItem_toilet();

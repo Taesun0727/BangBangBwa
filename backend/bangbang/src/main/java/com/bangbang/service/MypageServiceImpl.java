@@ -1,13 +1,13 @@
 package com.bangbang.service;
 
 import com.bangbang.domain.broker.BrokerRepository;
+import com.bangbang.domain.item.Item;
+import com.bangbang.domain.item.ItemRepository;
 import com.bangbang.domain.page.MypageRepository;
 import com.bangbang.domain.sign.User;
 import com.bangbang.domain.sign.UserRepository;
 import com.bangbang.dto.broadcast.BroadcastListResponseDto;
-import com.bangbang.dto.item.ItemDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +23,7 @@ public class MypageServiceImpl implements MypageService{
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final BrokerRepository brokerRepository;
+    private final ItemRepository itemRepository;
 
     @Override
     public User searchUser(Long userId) {
@@ -30,8 +31,8 @@ public class MypageServiceImpl implements MypageService{
     }
 
     @Override
-    public List<ItemDto> searchMyItem(Long userId) {
-        return mypageRepository.searchItemByBrokerId(userId);
+    public List<Item> searchMyItem(Long userId) {
+        return itemRepository.findItemByBrokerId(userId);
     }
 
     @Override

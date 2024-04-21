@@ -83,14 +83,14 @@ public class UserRestController {
     }}, HttpStatus.OK);
   }
 
-  @ApiOperation(value = "모든 유저 조회", notes = "관리자 페이지에서 모든 유저를 조회하는 용도입니다.")
-  @PostMapping("/admin/users/all")
-  public ResponseEntity<?> findAllUsers(HttpServletRequest request) throws Exception {
-    List<UserDto> user = userService.findAllUsers();
-    if (user != null && !user.isEmpty())
-      return new ResponseEntity<List<UserDto>>(user, HttpStatus.OK);
-    return new ResponseEntity(HttpStatus.NO_CONTENT);
-  }
+//  @ApiOperation(value = "모든 유저 조회", notes = "관리자 페이지에서 모든 유저를 조회하는 용도입니다.")
+//  @PostMapping("/admin/users/all")
+//  public ResponseEntity<?> findAllUsers(HttpServletRequest request) throws Exception {
+//    List<UserDto> user = userService.findAllUsers();
+//    if (user != null && !user.isEmpty())
+//      return new ResponseEntity<List<UserDto>>(user, HttpStatus.OK);
+//    return new ResponseEntity(HttpStatus.NO_CONTENT);
+//  }
 
 
 }

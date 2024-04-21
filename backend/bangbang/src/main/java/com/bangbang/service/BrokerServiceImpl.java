@@ -26,10 +26,10 @@ public class BrokerServiceImpl implements BrokerService{
         brokerRepository.save(broker.toEntity());
     }
 
-    @Override
-    public List<BrokerResponseDto> searchBrokerAll() {
-        return brokerRepository.findBrokerBefore();
-    }
+//    @Override
+//    public List<BrokerResponseDto> searchBrokerAll() {
+//        return brokerRepository.findBrokerBefore();
+//    }
 
     @Transactional
     @Override

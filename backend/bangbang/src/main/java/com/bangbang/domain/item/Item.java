@@ -8,7 +8,7 @@ import lombok.experimental.SuperBuilder;
 
 @Data
 @Entity
-@Table(name="item")
+@Table(name="item", indexes = {@Index(name="idx_sido_gugun_dong", columnList ="item_eubmyundongcode, item_dongcode")})
 @NoArgsConstructor
 @SuperBuilder
 public class Item {
@@ -112,10 +112,7 @@ public class Item {
     private boolean item_deal_complete;
 
     @Column(nullable = false)
-    @JoinTable(name="broker",
-            joinColumns = @JoinColumn(name="broker_id"),
-            inverseJoinColumns = @JoinColumn(name="broker_id"))
-    private long broker_id; //FK
+    private long brokerId; //FK
 
     @Column(nullable = true)
     private Integer item_status;
@@ -126,22 +123,17 @@ public class Item {
     @Column(nullable = true)
     private Integer item_toilet;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinTable(name="item_price",
-            joinColumns = @JoinColumn(name="item_id"),
-            inverseJoinColumns = @JoinColumn(name="item_id"))
+    @OneToOne(fetch = FetchType.LAZY)
+ @JoinColumn(name="item_id")
     private ItemPrice itemPrice;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinTable(name="manage_option",
-            joinColumns = @JoinColumn(name="item_id"),
-            inverseJoinColumns =  @JoinColumn(name="item_id"))
+    @OneToOne(fetch = FetchType.LAZY)
+
+            @JoinColumn(name="item_id")
     private ManageOption manageOption;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinTable(name="options",
-            joinColumns = @JoinColumn(name="item_id"),
-            inverseJoinColumns =  @JoinColumn(name="item_id"))
+    @OneToOne(fetch = FetchType.LAZY)
+@JoinColumn(name="item_id")
     private Option option;
 
     public String getItemId() {

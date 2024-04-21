@@ -189,8 +189,8 @@ const Nav = () => {
 
   // 검색
   const onClick = () => {
-    if (search || dong) {
-      navigate(`/items/search/${search}&${dong}`)
+    if (search || sido) {
+      navigate(`/items/search/${search}&${sido}&${gugun}&${dong}`)
       setSearch('')
       setGugunAll('')
       setDongAll('')
@@ -263,7 +263,7 @@ const Nav = () => {
         </NavSearchBarDiv>
         <NavSearchBarDiv>
            <SInput type="text" value={search} onChange={onChange} onKeyDown={(e) => activeEnter(e)} placeholder=" 검색어를 입력하세요" />
-           <SButton disabled={(search || dong) ? false : true}><SImg src={searchbutton} alt="#" onClick={onClick} /></SButton>
+           <SButton disabled={(search || sido) ? false : true}><SImg src={searchbutton} alt="#" onClick={onClick} /></SButton>
         </NavSearchBarDiv>
         <NavDiv>
           <NavLink style={({ isActive }) => (isActive ? activeStyle : nonActiveStyle)} to="/notices">

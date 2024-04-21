@@ -122,7 +122,7 @@ public class ItemSaveRequestDto {
                 .item_lng(item_lng)
                 .item_lat(item_lat)
                 .item_deal_complete(item_deal_complete)
-                .broker_id(broker_id)
+                .brokerId(broker_id)
                 .item_status(item_status)
                 .item_room(item_room)
                 .item_toilet(item_toilet)

@@ -20,5 +20,5 @@ public interface UserService {
 
     Long findUserId(String token) throws  Exception;
 
-    List<UserDto> findAllUsers() throws Exception;
+//    List<UserDto> findAllUsers() throws Exception;
 }

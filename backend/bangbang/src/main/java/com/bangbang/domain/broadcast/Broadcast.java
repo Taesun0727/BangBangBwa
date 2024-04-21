@@ -31,9 +31,7 @@ public class Broadcast extends BroadcastDatetime{
   @Column(name = "broadcast_title",length = 30, nullable = true)
   private String broadcastTitle;             //방송제목
 
-  @JoinTable(name="item",
-          joinColumns = @JoinColumn(name="item_id"),
-          inverseJoinColumns = @JoinColumn(name="item_id"))
+  @JoinColumn(name="item_id")
   private Long itemId;      //FK
 
   @Column(name = "image_path")
