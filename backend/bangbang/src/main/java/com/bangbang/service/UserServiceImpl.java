@@ -1,5 +1,6 @@
 package com.bangbang.service;
 
+import com.bangbang.domain.sign.UserRoles;
 import com.bangbang.dto.sign.*;
 import com.bangbang.domain.sign.User;
 import com.bangbang.domain.sign.UserRepository;
@@ -38,8 +39,8 @@ public class UserServiceImpl implements UserService {
                 .userEmail(SignUpInfo.getUserEmail())
                 .userNickname(SignUpInfo.getUserNickname())
                 .userPassword(passwordEncoder.encode(SignUpInfo.getUserPassword()))
-                .user_roles(Collections.singletonList(UserRoles.ROLES_USER.getName()))
-                .user_status(1).build();
+                .userRoles(Collections.singletonList(UserRoles.ROLES_USER.getName()))
+                .userStatus(1).build();
         userRepository.save(user);
 
     }
@@ -53,7 +54,7 @@ public class UserServiceImpl implements UserService {
             }
         System.out.println(user);
 
-        if (user.getUser_status() == 0) {
+        if (user.getUserStatus() == 0) {
             throw new BaseException(ErrorMessage.DONT_EXIST_ACCOUNT);
         }
 
@@ -63,18 +64,18 @@ public class UserServiceImpl implements UserService {
 
         String level = "";
 
-        if (user.getUser_roles().equals("ROLE_USER")) {
+        if (user.getUserRoles().equals("ROLE_USER")) {
             level = "1";
-        } else if (user.getUser_roles().equals("ROLE_BROKER")) {
+        } else if (user.getUserRoles().equals("ROLE_BROKER")) {
             level = "2";
-        } else if (user.getUser_roles().equals("ROLE_ADMIN")) {
+        } else if (user.getUserRoles().equals("ROLE_ADMIN")) {
             level = "3";
         }
 
         // 존재할시
-        String accessToken = jwtTokenProvider.createToken(user.getUserId(), user.getUser_roles());
-        String refreshToken = jwtTokenProvider.createRefresh(user.getUserId(), user.getUser_roles());
-        user.setUser_refresh_token(refreshToken);
+        String accessToken = jwtTokenProvider.createToken(user.getUserId(), user.getUserRoles());
+        String refreshToken = jwtTokenProvider.createRefresh(user.getUserId(), user.getUserRoles());
+        user.setUserRefreshToken(refreshToken);
         userRepository.save(user);
 
         ResponseSignIn responseSignIn = ResponseSignIn.builder()
@@ -86,7 +87,7 @@ public class UserServiceImpl implements UserService {
                 .nickName(user.getUserNickname())
                 .email(user.getUserEmail())
                 .id(user.getUserId())
-                .userRoles(user.getUser_roles())
+                .userRoles(user.getUserRoles())
                 .build();
 
         return responseSignIn;
@@ -98,10 +99,10 @@ public class UserServiceImpl implements UserService {
         if (object != null) {
             User user = object;
             System.out.println(token);
-            System.out.println(user.getUser_refresh_token());
-            if (token.equals(user.getUser_refresh_token())) {
+            System.out.println(user.getUserRefreshToken());
+            if (token.equals(user.getUserRefreshToken())) {
                 if (jwtTokenProvider.validateToken(token)) {
-                    return jwtTokenProvider.createToken(user.getUserId(), user.getUser_roles());
+                    return jwtTokenProvider.createToken(user.getUserId(), user.getUserRoles());
                 } else {
                     throw new BaseException(ErrorMessage.ACCESS_TOKEN_EXPIRE);
                 }
