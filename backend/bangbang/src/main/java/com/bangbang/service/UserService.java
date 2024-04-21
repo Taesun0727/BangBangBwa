@@ -1,11 +1,7 @@
 package com.bangbang.service;
 
 import com.bangbang.domain.sign.User;
-import com.bangbang.dto.sign.SignIn;
-import com.bangbang.dto.sign.FindPassword;
-
-import com.bangbang.dto.sign.SignUp;
-import com.bangbang.dto.sign.UserDto;
+import com.bangbang.dto.sign.*;
 
 import java.util.List;
 import java.util.Map;
@@ -14,7 +10,7 @@ public interface UserService {
 
     void signUp(SignUp SignUpInfo) throws Exception;
 
-    Map<String, Object> login(SignIn signInResult) throws Exception;
+    ResponseSignIn login(SignIn signInResult) throws Exception;
 
     String refreshToken(Long uid, String token) throws Exception;
 

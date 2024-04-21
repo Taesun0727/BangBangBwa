@@ -1,10 +1,7 @@
 package com.bangbang.controller;
 
 
-import com.bangbang.dto.sign.SignIn;
-import com.bangbang.dto.sign.FindPassword;
-import com.bangbang.dto.sign.SignUp;
-import com.bangbang.dto.sign.UserDto;
+import com.bangbang.dto.sign.*;
 import com.bangbang.service.UserServiceImpl;
 
 import io.swagger.annotations.Api;
@@ -50,29 +47,9 @@ public class UserRestController {
   @ApiOperation(value="로그인", notes = "req_data : [id, pw]")
   @PostMapping("/users/auth")
   public ResponseEntity<?> login(@RequestBody SignIn user) throws Exception {
-    Map<String, Object> token = userService.login(user);
-    String level = "";
+    ResponseSignIn responseSignIn = userService.login(user);
 
-    if (token.get("role").equals("ROLE_USER")) {
-      level = "1";
-    } else if (token.get("role").equals("ROLE_BROKER")) {
-      level = "2";
-    } else if (token.get("role").equals("ROLE_ADMIN")) {
-      level = "3";
-    }
-    String finalLevel = level;
-    return new ResponseEntity<Object>(new HashMap<String, Object>() {{
-      put("result", true);
-      put("msg", "로그인을 성공하였습니다.");
-      put("level", finalLevel);
-      put("accesstoken", token.get("access-token"));
-      put("refreshtoken", token.get("refresh-token"));
-      put("nickname", token.get("nickname"));
-      put("email", token.get("email"));
-      put("id", token.get("id"));
-      put("role", token.get("role"));
-
-    }}, HttpStatus.OK);
+    return new ResponseEntity<>((responseSignIn), HttpStatus.OK);
   }
 
 

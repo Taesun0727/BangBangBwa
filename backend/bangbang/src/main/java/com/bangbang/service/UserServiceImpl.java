@@ -1,18 +1,13 @@
 package com.bangbang.service;
 
-import com.bangbang.domain.sign.UserRoles;
-import com.bangbang.dto.sign.SignIn;
-import com.bangbang.dto.sign.FindPassword;
+import com.bangbang.dto.sign.*;
 import com.bangbang.domain.sign.User;
 import com.bangbang.domain.sign.UserRepository;
-import com.bangbang.dto.sign.SignUp;
-import com.bangbang.dto.sign.UserDto;
 import com.bangbang.exception.BaseException;
 import com.bangbang.exception.ErrorMessage;
 import com.bangbang.util.EmailHandler;
 import com.bangbang.util.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -50,7 +45,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Map<String, Object> login(SignIn signIn) throws Exception {
+    public ResponseSignIn login(SignIn signIn) throws Exception {
         System.out.println(signIn);
         User user = userRepository.findByUserEmail(signIn.getUserEmail());
             if (user == null) {
@@ -66,19 +61,35 @@ public class UserServiceImpl implements UserService {
             throw new BaseException(ErrorMessage.NOT_PASSWORD);
         }
 
+        String level = "";
+
+        if (user.getUser_roles().equals("ROLE_USER")) {
+            level = "1";
+        } else if (user.getUser_roles().equals("ROLE_BROKER")) {
+            level = "2";
+        } else if (user.getUser_roles().equals("ROLE_ADMIN")) {
+            level = "3";
+        }
+
         // 존재할시
         String accessToken = jwtTokenProvider.createToken(user.getUserId(), user.getUser_roles());
         String refreshToken = jwtTokenProvider.createRefresh(user.getUserId(), user.getUser_roles());
         user.setUser_refresh_token(refreshToken);
         userRepository.save(user);
-        return new HashMap<String, Object>() {{
-            put("nickname", user.getUserNickname());
-            put("access-token", accessToken);
-            put("refresh-token", refreshToken);
-            put("email", user.getUserEmail());
-            put("id", user.getUserId());
-            put("role", user.getUser_roles().get(0));
-        }};
+
+        ResponseSignIn responseSignIn = ResponseSignIn.builder()
+                .result(true)
+                .msg("로그인을 성공하였습니다.")
+                .level(level)
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
+                .nickName(user.getUserNickname())
+                .email(user.getUserEmail())
+                .id(user.getUserId())
+                .userRoles(user.getUser_roles())
+                .build();
+
+        return responseSignIn;
     }
 
     @Override
