@@ -41,9 +41,9 @@ public class BrokerServiceImpl implements BrokerService{
 
         //중개사 유저 역할 변경
         User user = userRepository.findByUserId(userId);
-        List<String> s = user.getUser_roles();
+        List<String> s = user.getUserRoles();
         s.add("ROLE_BROKER");
-        user.setUser_roles(s);
+        user.setUserRoles(s);
         userRepository.save(user);
     }
 

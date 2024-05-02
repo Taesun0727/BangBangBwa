@@ -39,7 +39,7 @@ public class PrincipalDetails implements OAuth2User, UserDetails {
     collect.add(new GrantedAuthority() {
       @Override
       public String getAuthority() {
-        return user.getUser_roles().toString();
+        return user.getUserRoles().toString();
       }
     });
     return collect;

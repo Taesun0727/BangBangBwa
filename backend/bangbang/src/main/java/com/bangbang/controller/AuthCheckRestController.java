@@ -39,13 +39,13 @@ public class AuthCheckRestController {
       try {
         User user = (User) customUserDetailsService.loadUserByUserId(Long.valueOf(jwtTokenProvider.getUserId(token)));
 
-        if(user.getUser_roles().get(0).equals("ROLE_USER")) {
+        if(user.getUserRoles().get(0).equals("ROLE_USER")) {
           re = "/";
         }
-        else if(user.getUser_roles().get(0) == "ROLE_BROKER"){
+        else if(user.getUserRoles().get(0) == "ROLE_BROKER"){
           re = "/broker";
         }
-        else if(user.getUser_roles().get(0) == "ROLE_ADMIN"){
+        else if(user.getUserRoles().get(0) == "ROLE_ADMIN"){
           re = "/admin";
         }
         status = HttpStatus.ACCEPTED;

@@ -35,6 +35,6 @@ public interface MypageRepository extends JpaRepository <User, Long>{
     void modifyUserPassword(@Param("userId")Long userId, @Param("password") String password);
 
     @Modifying
-    @Query("update User u set u.user_status = 0 where u.userId =:userId")
+    @Query("update User u set u.userStatus = 0 where u.userId =:userId")
     void deactivateUser(@Param("userId")Long userId);
 }

@@ -54,13 +54,13 @@ public class OauthServiceImpl extends DefaultOAuth2UserService {
           .userEmail(email)
           .userNickname(userName)
           .userPassword(userPassword)
-          .user_roles(Collections.singletonList("ROLE_USER"))
-          .user_status(1).build();
+          .userRoles(Collections.singletonList("ROLE_USER"))
+          .userStatus(1).build();
       userRepository.save(findUser);
 
       findUser = userRepository.findByUserEmail(email);
     }
-    return new DefaultOAuth2User (Collections.singleton(new SimpleGrantedAuthority(findUser.getUser_roles().get(0))),
+    return new DefaultOAuth2User (Collections.singleton(new SimpleGrantedAuthority(findUser.getUserRoles().get(0))),
             oAuth2UserInfo.getAttributes(), "id");
   }
 }

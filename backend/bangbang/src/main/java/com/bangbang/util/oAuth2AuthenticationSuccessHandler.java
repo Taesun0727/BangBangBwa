@@ -25,6 +25,7 @@ public class oAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
   public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
       Authentication authentication) throws IOException {
     OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
+    System.out.println(oAuth2User);
     Object userEmail = null;
     if (oAuth2User.getAttributes().get("kakao_account") != null) {
       KakaoUserInfo oAuth2UserInfo;
@@ -35,28 +36,28 @@ public class oAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     }
     User user = userRepository.findByUserEmail((String)userEmail);
 
-    String accessToken = jwtTokenProvider.createToken(user.getUserId(), user.getUser_roles());
-    String refreshToken = jwtTokenProvider.createRefresh(user.getUserId(), user.getUser_roles());
-    user.setUser_refresh_token(refreshToken);
+    String accessToken = jwtTokenProvider.createToken(user.getUserId(), user.getUserRoles());
+    String refreshToken = jwtTokenProvider.createRefresh(user.getUserId(), user.getUserRoles());
+    user.setUserRefreshToken(refreshToken);
     userRepository.save(user);
 
     String level = "";
 
-    if (user.getUser_roles().get(0).equals("ROLE_USER")) {
+    if (user.getUserRoles().get(0).equals("ROLE_USER")) {
       level = "1";
-    } else if (user.getUser_roles().get(0).equals("ROLE_BROKER")) {
+    } else if (user.getUserRoles().get(0).equals("ROLE_BROKER")) {
       level = "2";
-    } else if (user.getUser_roles().get(0).equals("ROLE_ADMIN")) {
+    } else if (user.getUserRoles().get(0).equals("ROLE_ADMIN")) {
       level = "3";
     }
 
-    String url = makeRedirectUrl(accessToken, refreshToken, user.getUserEmail(), user.getUserNickname(), user.getUser_roles().get(0), level );
+    String url = makeRedirectUrl(accessToken, refreshToken, user.getUserEmail(), user.getUserNickname(), user.getUserRoles().get(0), level );
 
     getRedirectStrategy().sendRedirect(request, response, url);
   }
 
   private String makeRedirectUrl(String accessToken, String refreshToken, String email, String nickname, String role, String level) {
-    return UriComponentsBuilder.fromUriString("https://i8a405.p.ssafy.io/oauth2/redirect?accessToken="+accessToken +"&refreshToken=" + refreshToken +"&email=" + email + "&nickname=" + nickname + "&role=" + role + "&level=" +level)
+    return UriComponentsBuilder.fromUriString("http://localhost/oauth2/redirect?accessToken="+accessToken +"&refreshToken=" + refreshToken +"&email=" + email + "&nickname=" + nickname + "&role=" + role + "&level=" +level)
         .build().toUriString();
   }
 }
