@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,7 +35,7 @@ public class UserRestController {
 
   @ApiOperation(value = "회원 등록", notes = "회원을 등록합니다.")
   @PostMapping("/users/new")
-  public ResponseEntity<?> signUp(@RequestBody SignUp SignUpInfo) throws Exception {
+  public ResponseEntity<?> signUp(@Valid @RequestBody SignUp SignUpInfo) throws Exception {
     userService.signUp(SignUpInfo);
 
     return new ResponseEntity<Object>(new HashMap<String, Object>() {{
